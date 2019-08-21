@@ -69,14 +69,26 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>C:\Users\KrulGPL\Documents\GitHub\TEST\TEST\TEST\Dependencies\glad;C:\Users\KrulGPL\Documents\GitHub\TEST\TEST\TEST\Dependencies;$(SolutionDir)TEST\Dependencies\glew-1.9.0\include;$(SolutionDir)TEST\Dependencies\freeglut-2.8.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\KrulGPL\Documents\GitHub\TEST\TEST\TEST\Dependencies;C:\Users\KrulGPL\Documents\GitHub\TEST\TEST\TEST\Dependencies\glad;$(SolutionDir)TEST\Dependencies\glew-1.9.0\lib;$(SolutionDir)TEST\Dependencies\freeglut-2.8.0\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>C:\Users\KrulGPL\Documents\GitHub\TEST\TEST\TEST\Dependencies\glad;C:\Users\KrulGPL\Documents\GitHub\TEST\TEST\TEST\Dependencies;$(SolutionDir)TEST\Dependencies\glew-1.9.0\include;$(SolutionDir)TEST\Dependencies\freeglut-2.8.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\KrulGPL\Documents\GitHub\TEST\TEST\TEST\Dependencies;C:\Users\KrulGPL\Documents\GitHub\TEST\TEST\TEST\Dependencies\glad;$(SolutionDir)TEST\Dependencies\glew-1.9.0\lib;$(SolutionDir)TEST\Dependencies\freeglut-2.8.0\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\KrulGPL\Documents\GitHub\TEST\TEST\TEST\Dependencies\glad;C:\Users\KrulGPL\Documents\GitHub\TEST\TEST\TEST\Dependencies;$(SolutionDir)TEST\Dependencies\glew-1.9.0\include;C:\Users\KrulGPL\Documents\GitHub\TEST\TEST\TEST\Dependencies\freeglut-2.8.0\include;$(SolutionDir)TEST\Dependencies\GLFW\include</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>C:\Users\KrulGPL\Documents\GitHub\TEST\TEST\TEST\Dependencies;C:\Users\KrulGPL\Documents\GitHub\TEST\TEST\TEST\Dependencies\glad;C:\Users\KrulGPL\Documents\GitHub\TEST\TEST\TEST\Dependencies\glew-1.9.0\lib;C:\Users\KrulGPL\Documents\GitHub\TEST\TEST\TEST\Dependencies\freeglut-2.8.0\lib;$(SolutionDir)TEST\Dependencies\GLFW\lib-vc2015</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;freeglut.lib;glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -94,10 +106,13 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\KrulGPL\Documents\GitHub\TEST\TEST\TEST\Dependencies\glad;C:\Users\KrulGPL\Documents\GitHub\TEST\TEST\TEST\Dependencies;$(SolutionDir)TEST\Dependencies\glew-1.9.0\include;C:\Users\KrulGPL\Documents\GitHub\TEST\TEST\TEST\Dependencies\freeglut-2.8.0\include;$(SolutionDir)TEST\Dependencies\GLFW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>C:\Users\KrulGPL\Documents\GitHub\TEST\TEST\TEST\Dependencies;C:\Users\KrulGPL\Documents\GitHub\TEST\TEST\TEST\Dependencies\glad;C:\Users\KrulGPL\Documents\GitHub\TEST\TEST\TEST\Dependencies\glew-1.9.0\lib;C:\Users\KrulGPL\Documents\GitHub\TEST\TEST\TEST\Dependencies\freeglut-2.8.0\lib;$(SolutionDir)TEST\Dependencies\GLFW\lib-vc2015</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;freeglut.lib;glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -115,6 +130,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\Desktop\glad.c" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

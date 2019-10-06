@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 
 #include "Shader.h"
+#include "Window.h"
 
 #include <iostream>
 #include <string>
@@ -17,38 +18,23 @@ void processInput(GLFWwindow *window);
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
+auto TWindow = new Window;
+
+float vertices[] = {		//colors
+	-0.5f, -0.5f, 0.0f,		1.0f, 0.0f, 0.0f,	// bottom right
+	 0.5f, -0.5f, 0.0f,		0.0f, 1.0f, 0.0f,	// bottom left
+	 0.0f,  0.5f, 0.0f,		0.0f, 0.0f, 1.0f	// top
+};
+
+
+
+
 int main() {
-	glfwInit();
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	TWindow->init(SCR_WIDTH, SCR_HEIGHT);
 
-#ifdef __APPLE__
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // uncomment this statement to fix compilation on OS X
-#endif
+	glfwSetFramebufferSizeCallback(TWindow->window, framebuffer_size_callback);
 
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Hello Tringle", NULL, NULL);
-	if (window == NULL) {
-		std::cout << "Failed to create GLFW window" << std::endl;
-		glfwTerminate();
-		return -1;
-	}
-	glfwMakeContextCurrent(window);
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-		std::cout << "Failed to initialize GLAD" << std::endl;
-		return -1;
-	}
-
-	float vertices[] = {		//colors
-		-0.5f, -0.5f, 0.0f,		1.0f, 0.0f, 0.0f,	// bottom right
-		 0.5f, -0.5f, 0.0f,		0.0f, 1.0f, 0.0f,	// bottom left
-		 0.0f,  0.5f, 0.0f,		0.0f, 0.0f, 1.0f	// top
-	};
-
-	Shader ourShader("3.3.shader.vs", "3.3.shader.fs");
-
+	
 	unsigned int VBO,VAO;
 	glGenBuffers(1, &VBO);
 	glGenVertexArrays(1, &VAO);
@@ -64,13 +50,13 @@ int main() {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
-		
+	auto ourShader = Shader("3.3.shader.vs", "3.3.shader.fs");
 	int nrAttributes;
 	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
 	std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes << std::endl;
-	while (!glfwWindowShouldClose(window)) {
+	while (!glfwWindowShouldClose(TWindow->window)) {
 
-		processInput(window);
+		processInput(TWindow->window);
 		
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -85,19 +71,19 @@ int main() {
 
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 
-		glfwSwapBuffers(window);
+		glfwSwapBuffers(TWindow->window);
 		glfwPollEvents();
 	}
-
+	/*
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
-
+	*/
 	glfwTerminate();
 	return 0;
 }
 
 void processInput(GLFWwindow *window) {
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
 }
 

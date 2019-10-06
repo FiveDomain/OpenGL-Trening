@@ -1,2 +1,4 @@
-﻿  Shader.cpp
+﻿  main.cpp
+c:\program files (x86)\windows kits\10\include\10.0.17763.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
+  c:\users\krulgpl\documents\github\test\test\test\dependencies\glad\glad.h(32): note: see previous definition of 'APIENTRY'
   TEST.vcxproj -> C:\Users\KrulGPL\Documents\GitHub\TEST\TEST\Debug\TEST.exe

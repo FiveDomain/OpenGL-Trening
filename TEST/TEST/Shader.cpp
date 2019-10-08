@@ -118,7 +118,7 @@ void Shader::LoadFromFile(const char * filename, ShaderType shaderType) {
 	
 	if (!succes) {
 		glad_glGetShaderInfoLog(t_ShaderID, 512, NULL, errBuffer);
-		std::cerr << "Filed to compile shader fro file: " + std::string(filename) + " "  << errBuffer;
+		std::cerr << "Filed to compile shader fro file: "  << filename << " "  << errBuffer;
 
 	}
 }

@@ -1,6 +1,6 @@
 #include "Shader.h"
 //do narpawy
-
+/*
 void checkCompileErrors(unsigned int shader, std::string type);
 
 Shader::Shader(const GLchar * vertexPath, const GLchar * fragmentPath) {
@@ -88,4 +88,49 @@ void Shader::setInt(const std::string & name, int value) const {
 
 void Shader::setFloat(const std::string & name, float value) const {
 	glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
+}
+*/
+
+void Shader::LoadFromFile(const char * filename, ShaderType shaderType) {
+	std::fstream file;
+	file.open(filename, std::ios::in);
+
+	if (!file) {
+		std::cerr << "Filed to open Shdaer file :( \n";
+		return;
+	}
+
+	std::stringstream sstream;
+
+	sstream << file.rdbuf();
+
+	file.close();
+
+	std::string str = sstream.str();
+
+	const char* shaderText = str.c_str();
+
+	t_ShaderID = glCreateShader(shaderType); \
+
+	glShaderSource(t_ShaderID, 1, &shaderText, NULL);
+	glCompileShader(t_ShaderID);
+	glGetShaderiv(t_ShaderID, GL_COMPILE_STATUS, &succes);
+	
+	if (!succes) {
+		glad_glGetShaderInfoLog(t_ShaderID, 512, NULL, errBuffer);
+		std::cerr << "Filed to compile shader fro file: " + std::string(filename) + " "  << errBuffer;
+
+	}
+}
+
+Shader::Shader(const char * filename, ShaderType sType) {
+	LoadFromFile(filename, sType);
+}
+
+GLuint Shader::getShaderID()
+{
+	return GLuint(t_ShaderID);
+}
+
+Shader::~Shader() {
 }

@@ -1,7 +1,5 @@
 #include "Window.h"
 
-
-
 bool Window::init(unsigned short SCR_WIDTH, unsigned short SCR_HEIGHT) {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);

@@ -1,6 +1,6 @@
 #include "Shader.h"
 //do narpawy
-/*
+
 void checkCompileErrors(unsigned int shader, std::string type);
 
 Shader::Shader(const GLchar * vertexPath, const GLchar * fragmentPath) {
@@ -89,7 +89,7 @@ void Shader::setInt(const std::string & name, int value) const {
 void Shader::setFloat(const std::string & name, float value) const {
 	glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
 }
-*/
+
 
 void Shader::LoadFromFile(const char * filename, ShaderType shaderType) {
 	std::fstream file;

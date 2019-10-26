@@ -43,10 +43,13 @@ int main() {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
-	//auto ourShader = Shader("3.3.shader.vs", "3.3.shader.fs");
+	auto ourShader = Shader("3.3.shader.vs", "3.3.shader.fs");
 	int nrAttributes;
+
 	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
+
 	std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes << std::endl;
+
 	while (!glfwWindowShouldClose(t_Window->window)) {
 
 		processInput(t_Window->window);
@@ -54,12 +57,12 @@ int main() {
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		/*ourShader.use();
+		ourShader.use();
 		ourShader.setFloat("someUniform", 1.0f);
-		glBindVertexArray(VAO);*/
-		/*float timeValue = glfwGetTime();
+		glBindVertexArray(VAO);/*
+		float timeValue = glfwGetTime();
 		float greenValue = sin(timeValue) / 2.0f + 0.5f;
-		int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
+		/*int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
 		glUniform4f(vertexColorLocation, 1.0f, greenValue, 0.0f, 1.0f);*/
 
 		glDrawArrays(GL_TRIANGLES, 0, 3);

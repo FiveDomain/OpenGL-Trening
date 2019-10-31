@@ -148,6 +148,7 @@
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="TBase.cpp" />
     <ClCompile Include="UI.cpp" />
+    <ClCompile Include="VAO.cpp" />
     <ClCompile Include="Video.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
@@ -168,6 +169,7 @@
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="TBase.h" />
     <ClInclude Include="UI.h" />
+    <ClInclude Include="VAO.h" />
     <ClInclude Include="Video.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>

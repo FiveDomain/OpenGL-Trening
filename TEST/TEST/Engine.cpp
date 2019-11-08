@@ -1,7 +1,6 @@
 #include "Engine.h"
 
 Engine::Engine() {
-
 }
 
 
@@ -21,13 +20,20 @@ int Engine::Engine_main() {
 
 	Vertex vert[] = {
 		{ glm::vec3(-0.5f,-0.5f,1.0f) },
-		{ glm::vec3(0.5f,-0.5f,1.0f) },
+		{ glm::vec3(0.5f,-0.5f,-1.0f) },
 		{ glm::vec3(0.0f,0.5f,1.0f) }
+	};
+	Vertex verto[] = {
+		{ glm::vec3(-0.5f,0.5f,1.0f) },
+		{ glm::vec3(1.0f,-0.5f,-1.0f) },
+		{ glm::vec3(1.0f,0.5f,1.0f) }
 	};
 
 	GLuint indicies[] = { 0,1,2 };
+	GLuint indicieso[] = { 0,1,2 };
 
 	VAO vao(new std::vector<Vertex>(vert, std::end(vert)), new std::vector<GLuint>(indicies, std::end(indicies)));
+	VAO vaoo(new std::vector<Vertex>(verto, std::end(verto)), new std::vector<GLuint>(indicieso, std::end(indicieso)));
 
 	auto ourShader = Shader("3.3.shader.vs", "3.3.shader.fs");
 	int nrAttributes;
@@ -37,7 +43,7 @@ int Engine::Engine_main() {
 	std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes << std::endl;
 	glfwSetFramebufferSizeCallback(t_Window->window, framebuffer_size_callback);
 
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	while (!glfwWindowShouldClose(t_Window->window)) {
 
@@ -48,10 +54,10 @@ int Engine::Engine_main() {
 
 		ourShader.use();
 		ourShader.setFloat("someUniform", 1.0f);
-		glBindVertexArray(vao.getVAO());
-		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, NULL);
+		vao.Draw();
+		vaoo.Draw();
 
-		//glDrawArrays(GL_TRIANGLES, 0, 3);
+	//	glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, NULL);
 
 		glfwSwapBuffers(t_Window->window);
 		glfwPollEvents();

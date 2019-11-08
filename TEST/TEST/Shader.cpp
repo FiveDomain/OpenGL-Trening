@@ -9,21 +9,27 @@ Shader::Shader(const GLchar * vertexPath, const GLchar * fragmentPath) {
 	std::string fragmentCode;
 	std::ifstream vShaderFile;
 	std::ifstream fShaderFile;
+	/*
+	int nrAttributes;
+
+	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
+	std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes << std::endl;
+	*/
 	// ensure ifstream objects can throw exceptions:
 	vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 	fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 	try {
-		// open files
 		vShaderFile.open(vertexPath);
 		fShaderFile.open(fragmentPath);
+
 		std::stringstream vShaderStream, fShaderStream;
-		// read file's buffer contents into streams
+		
 		vShaderStream << vShaderFile.rdbuf();
 		fShaderStream << fShaderFile.rdbuf();
-		// close file handlers
+		
 		vShaderFile.close();
 		fShaderFile.close();
-		// convert stream into string
+		
 		vertexCode = vShaderStream.str();
 		fragmentCode = fShaderStream.str();
 	}
@@ -32,7 +38,7 @@ Shader::Shader(const GLchar * vertexPath, const GLchar * fragmentPath) {
 	}
 	const char* vShaderCode = vertexCode.c_str();
 	const char * fShaderCode = fragmentCode.c_str();
-	// 2. compile shaders
+	// compile shaders
 	unsigned int vertex, fragment;
 	// vertex shader
 	vertex = glCreateShader(GL_VERTEX_SHADER);
@@ -50,9 +56,14 @@ Shader::Shader(const GLchar * vertexPath, const GLchar * fragmentPath) {
 	glAttachShader(ID, fragment);
 	glLinkProgram(ID);
 	checkCompileErrors(ID, "PROGRAM");
-	// delete the shaders as they're linked into our program now and no longer necessary
+
 	glDeleteShader(vertex);
 	glDeleteShader(fragment);
+}
+
+void Shader::clear(float red, float gren, float blue, float alfa ) {
+	glClearColor(red, gren, blue, alfa);
+	glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void checkCompileErrors(unsigned int shader, std::string type) {
@@ -72,6 +83,7 @@ void checkCompileErrors(unsigned int shader, std::string type) {
 			std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
 		}
 	}
+
 }
 
 void Shader::use() {
@@ -89,8 +101,7 @@ void Shader::setInt(const std::string & name, int value) const {
 void Shader::setFloat(const std::string & name, float value) const {
 	glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
 }
-
-
+/*
 void Shader::LoadFromFile(const char * filename, ShaderType shaderType) {
 	std::fstream file;
 	file.open(filename, std::ios::in);
@@ -110,7 +121,7 @@ void Shader::LoadFromFile(const char * filename, ShaderType shaderType) {
 
 	const char* shaderText = str.c_str();
 
-	t_ShaderID = glCreateShader(shaderType); \
+	t_ShaderID = glCreateShader(shaderType); 
 
 	glShaderSource(t_ShaderID, 1, &shaderText, NULL);
 	glCompileShader(t_ShaderID);
@@ -122,11 +133,11 @@ void Shader::LoadFromFile(const char * filename, ShaderType shaderType) {
 
 	}
 }
-
+*//*
 Shader::Shader(const char * filename, ShaderType sType) {
 	LoadFromFile(filename, sType);
 }
-
+*/
 GLuint Shader::getShaderID()
 {
 	return GLuint(t_ShaderID);

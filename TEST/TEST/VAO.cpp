@@ -1,13 +1,19 @@
 #include "VAO.h"
 
+VAO::VAO() {
+}
+
 VAO::VAO(std::vector<Vertex>* vertexBuffer, std::vector<GLuint>* elementBuffer)
 	:m_vertexBuffer(vertexBuffer), m_elementBuffer(elementBuffer) {
 	Init();
 }
 
+void VAO::Draw() {
+	glBindVertexArray(getVAO());
+	glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, NULL);
+}
 
-GLuint VAO::getVAO()
-{
+GLuint VAO::getVAO() {
 	return m_VAO;
 }
 
@@ -19,8 +25,7 @@ VAO::~VAO() {
 	glDeleteVertexArrays(1, &m_VAO);
 }
 
-void VAO::Init()
-{
+void VAO::Init() {
 	glGenVertexArrays(1, &m_VAO);
 	glGenBuffers(1, &m_VBO);
 	glGenBuffers(1, &m_EBO);

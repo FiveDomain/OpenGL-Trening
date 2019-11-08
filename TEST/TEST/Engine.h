@@ -6,6 +6,7 @@
 
 class Engine {
 
+
 	void processInput(GLFWwindow *window);
 
 	const unsigned int SCR_WIDTH = 800;

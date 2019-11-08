@@ -22,9 +22,8 @@ class Shader {
 
 	GLuint t_ShaderID;
 public:
-	void LoadFromFile(const char* filename, ShaderType shaderType);
+	//void LoadFromFile(const char* filename, ShaderType shaderType);
 
-	Shader(const char* filename, ShaderType shaderType);
 	GLuint getShaderID();
 
 	~Shader();
@@ -33,7 +32,7 @@ public:
 
 
 	Shader(const GLchar* vertexPath, const GLchar* fragmentPath);
-
+	void clear(float red, float gren, float blue, float alfa);
 	void use();
 	void setBool(const std::string &name, bool value) const;
 	void setInt(const std::string &name, int value) const;

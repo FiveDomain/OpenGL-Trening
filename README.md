@@ -1,2 +1,2 @@
-# TEST
- For Tests
+# OpenGL-Trening
+for Trening
